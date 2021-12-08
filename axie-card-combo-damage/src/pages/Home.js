@@ -1,12 +1,11 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Home from './pages/Home';
-import axieApi from './services/getAxiesByRoninAdress';
+import Loader from 'react-loader-spinner';
+import axieApi from '../services/getAxiesByRoninAdress';
 import { Form, Container, Button, Row, Col } from 'react-bootstrap';
 
-export default function App()
+export default function Home()
 {
   const [axieDetails, setAxieDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
