@@ -4,6 +4,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import axieApi from '../services/getAxiesByRoninAdress';
 import { Form, Container, Button, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home()
 {
@@ -11,12 +12,15 @@ export default function Home()
   const [isLoading, setIsLoading] = useState(false);
   const [roninAddress, setRoninAddress] = useState('');
 
+
+  const navigate = useNavigate();
   function handleSubmit(event)
   {
     event.preventDefault();
     setIsLoading(true);
     axieApi(roninAddress).then((axieDetails) => setAxieDetails(axieDetails));
     setIsLoading(false);
+    navigate('/axies-team');
   }
   
   return (
