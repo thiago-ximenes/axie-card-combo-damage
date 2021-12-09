@@ -4,23 +4,22 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import axieApi from '../services/getAxiesByRoninAdress';
 import { Form, Container, Button, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import AxieRoninTeam from '../components/AxieRoninTeam';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Home()
 {
-  const [axieDetails, setAxieDetails] = useState([]);
+  const [roninDetails, setRoninDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [roninAddress, setRoninAddress] = useState('');
 
+  // const navigate = useNavigate();
 
-  const navigate = useNavigate();
-  function handleSubmit(event)
-  {
+  function handleSubmit(event) {
     event.preventDefault();
-    setIsLoading(true);
-    axieApi(roninAddress).then((axieDetails) => setAxieDetails(axieDetails));
-    setIsLoading(false);
-    navigate('/axies-team');
+    localStorage.setItem('roninAddress', roninAddress);
+    axieApi(roninAddress).then((roninDetails) => setRoninDetails(roninDetails));
+    // navigate('/axies-team');
   }
   
   return (
@@ -31,7 +30,7 @@ export default function Home()
           <Row>
             <Col>
               <Form.Control
-                value={ roninAddress }
+                value={ `ronin:${roninAddress}` }
                 onChange={ (e) => setRoninAddress(e.target.value) }
                 type="text"
                 placeholder="Enter Ronin Address"
@@ -49,6 +48,18 @@ export default function Home()
           </Row>
         </Form.Group>
       </Form>
+      <Row className='g-3 container mt-1 justify-content-md-center' xs={1} md={3}>
+        { roninDetails.length > 0 && (
+          roninDetails.map((axie) => {
+            return (
+              <AxieRoninTeam
+                key={ axie.id }
+                axieInfo={ axie }
+              />
+            );
+          })
+        )}
+      </Row>
     </Container>
   );
 }
