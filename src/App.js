@@ -10,6 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/axie-team" element={ <AxiesTeam /> } />
+        <Route path="*" element={ <h1>Tem algo errado aí</h1> } />
       </Routes>
     </HashRouter>
 
