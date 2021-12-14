@@ -1,25 +1,43 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from 'react-loader-spinner';
+// import Loader from 'react-loader-spinner';
 import axieApi from '../services/getAxiesByRoninAdress';
-import { Form, Container, Button, Row, Col } from 'react-bootstrap';
+import { Form, Container, Button, Row, Col, InputGroup } from 'react-bootstrap';
 import AxieRoninTeam from '../components/AxieRoninTeam';
 // import { useNavigate } from 'react-router-dom';
 
 export default function Home()
 {
   const [roninDetails, setRoninDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [roninAddress, setRoninAddress] = useState('');
+  const [isGoButtonDisable, setGoButtonEnable] = useState(true);
 
   // const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('roninAddress')) {
+      setRoninAddress(localStorage.getItem('roninAddress'));
+    }
+  }, [])
+
+  useEffect(() => {
+    if(roninAddress.length === 40)
+      setGoButtonEnable(false);
+    else
+      setGoButtonEnable(true);
+  }, [roninAddress])
 
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem('roninAddress', roninAddress);
     axieApi(roninAddress).then((roninDetails) => setRoninDetails(roninDetails));
-    // navigate('/axies-team');
+    // navigate('/axie-team');
+  }
+
+  function handleOnChange (event) {
+    setRoninAddress(event.target.value);
   }
   
   return (
@@ -28,23 +46,27 @@ export default function Home()
         <Form.Group>
           <Row><Form.Label>Enter Ronin Address</Form.Label></Row>
           <Row>
+            <InputGroup>
+              <InputGroup.Text>ronin:</InputGroup.Text>
             <Col>
               <Form.Control
-                value={ `ronin:${roninAddress}` }
-                onChange={ (e) => setRoninAddress(e.target.value) }
+                value={ roninAddress }
+                onChange={ handleOnChange }
                 type="text"
                 placeholder="Enter Ronin Address"
-              />
+                />
               </Col>
               <Col xs="auto">
               <Button
+                disabled={ isGoButtonDisable }
                 variant="primary"
                 type="submit"
                 onClick={ handleSubmit }
-              >
+                >
                 Go
               </Button>
             </Col>
+                </InputGroup>
           </Row>
         </Form.Group>
       </Form>
