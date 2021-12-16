@@ -72,6 +72,7 @@ export default function Home()
             </div>
         </Form.Group>
       </Form>
+      <h2 className="text-center">Select The Axie Team</h2>
       <Row className='g-3 container mt-1 justify-content-md-center' xs={1} md={3}>
         { roninDetails.length > 0 && (
           roninDetails.map((axie) => {
