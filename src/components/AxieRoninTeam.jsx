@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Col, Row } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function AxieRoninTeam(props) {
 
@@ -10,12 +10,24 @@ export default function AxieRoninTeam(props) {
   const { axieInfo, axieIdReceived, teamIsFull } = props;
   const { image, id } = axieInfo;
 
+  useEffect(() => {
+    if (teamIsFull && select !== 'Remove') {
+      setSelect('Team is full');
+      setButtonVariant('secondary');
+    } else if (select === 'Remove') {
+      setButtonVariant('danger');
+    } else {
+      setSelect('Select');
+      setButtonVariant('success');
+    }
+  }, [teamIsFull, select]);
+
   function handleClick() {
     if (select === 'Select' && !teamIsFull) {
       setSelect('Remove');
-      setButtonVariant('danger');
+    } else if (teamIsFull) {
+      setSelect('Team is full');
     } else {
-      setButtonVariant('success');
       setSelect('Select');
     }
     axieIdReceived(id);
