@@ -4,7 +4,7 @@ import { Card, Button, Col, Row } from 'react-bootstrap';
 export default function AxieRoninTeam(props) {
 
   const { axieInfo } = props;
-  const { image, name } = axieInfo;
+  const { image } = axieInfo;
 
   console.log(axieInfo);
 
