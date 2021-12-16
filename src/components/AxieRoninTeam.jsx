@@ -9,8 +9,8 @@ export default function AxieRoninTeam(props) {
   console.log(axieInfo);
 
   return (
-    <Col md="auto">
-      <Card style={{ width: '12rem' }}>
+    <Col lg={3} sm={1}>
+      <Card>
         <Card.Img variant="top" src={ image } />
         <Card.Body>
             <Row>

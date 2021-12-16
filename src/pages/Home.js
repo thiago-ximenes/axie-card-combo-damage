@@ -44,7 +44,7 @@ export default function Home()
     <Container className="mt-5">
       <Form>
         <Form.Group>
-          <Row><Form.Label>Enter Ronin Address</Form.Label></Row>
+          <Row><Form.Label>Enter The Ronin Address</Form.Label></Row>
           <Row>
             <InputGroup>
               <InputGroup.Text>ronin:</InputGroup.Text>
@@ -56,8 +56,12 @@ export default function Home()
                 placeholder="Enter Ronin Address"
                 />
               </Col>
-              <Col xs="auto">
+            </InputGroup>
+          </Row>
+            <div className="d-grid gap-2">
               <Button
+                className="mt-1"
+                size="lg"
                 disabled={ isGoButtonDisable }
                 variant="primary"
                 type="submit"
@@ -65,9 +69,7 @@ export default function Home()
                 >
                 Go
               </Button>
-            </Col>
-                </InputGroup>
-          </Row>
+            </div>
         </Form.Group>
       </Form>
       <Row className='g-3 container mt-1 justify-content-md-center' xs={1} md={3}>
