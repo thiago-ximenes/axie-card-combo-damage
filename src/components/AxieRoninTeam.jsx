@@ -7,17 +7,18 @@ export default function AxieRoninTeam(props) {
   const [ select, setSelect ] = useState('Select');
   const [ buttonVariant, setButtonVariant ] = useState('success');
 
-  const { axieInfo } = props;
-  const { image } = axieInfo;
+  const { axieInfo, axieIdReceived, teamIsFull } = props;
+  const { image, id } = axieInfo;
 
   function handleClick() {
-    if (select === 'Select') {
+    if (select === 'Select' && !teamIsFull) {
       setSelect('Remove');
       setButtonVariant('danger');
     } else {
       setButtonVariant('success');
       setSelect('Select');
     }
+    axieIdReceived(id);
   }
 
   return (

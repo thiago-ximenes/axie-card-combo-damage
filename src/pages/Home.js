@@ -12,7 +12,8 @@ export default function Home()
   const [roninDetails, setRoninDetails] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   const [roninAddress, setRoninAddress] = useState('');
-  const [isGoButtonDisable, setGoButtonEnable] = useState(true);
+  const [isGoButtonDisable, setGoButtonEnable] = useState(true);    const [ axieTeam, setAxieToTheTeam ] = useState([]);
+  const [ teamIsFull, setTeamIsFull ] = useState(false);
 
   // const navigate = useNavigate();
 
@@ -29,6 +30,14 @@ export default function Home()
       setGoButtonEnable(true);
   }, [roninAddress])
 
+  useEffect(() => {
+    if(axieTeam.length === 3) {
+      setTeamIsFull(true);
+    } else {
+      setTeamIsFull(false);
+    }
+  }, [axieTeam])
+
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem('roninAddress', roninAddress);
@@ -39,7 +48,15 @@ export default function Home()
   function handleOnChange (event) {
     setRoninAddress(event.target.value);
   }
-  
+
+  function addAxieToTeam(id) {
+    if (axieTeam.includes(id)) {
+      setAxieToTheTeam(axieTeam.filter(axie => axie !== id));
+    } else if (axieTeam.length < 3) {
+    setAxieToTheTeam([ ...axieTeam, id ]);
+    }
+  }
+
   return (
     <Container className="mt-5">
       <Form>
@@ -80,6 +97,8 @@ export default function Home()
               <AxieRoninTeam
                 key={ axie.id }
                 axieInfo={ axie }
+                axieIdReceived={ addAxieToTeam }
+                teamIsFull={ teamIsFull }
               />
             );
           })
