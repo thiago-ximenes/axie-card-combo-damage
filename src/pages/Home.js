@@ -110,6 +110,13 @@ export default function Home()
                 );
               })
           }
+          <Button
+            size="lg"
+            disabled={ !teamIsFull }
+            variant={ teamIsFull ? 'success' : 'secondary' }
+          >
+            { teamIsFull ? "Let's Rock!" : `Add More ${ 3 - axieTeam.length } Axies` }
+          </Button>
         </Row>
       </Card>
       )}
