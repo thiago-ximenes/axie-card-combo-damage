@@ -96,10 +96,10 @@ export default function Home()
         </Form.Group>
       </Form>
       <h2 className="text-center">Select The Axie Team</h2>
+      { axieTeam.length > 0 && (
       <Card bg="dark">
         <Row className='g-3 container mt-1 justify-content-md-center mb-4' xs={1} md={3}>
-          { axieTeam.length > 0 && (
-              axieTeam.map((axie) => {
+          { axieTeam.map((axie) => {
                 return (
                   <AxieTeamSelected
                     key={ axie.id }
@@ -109,9 +109,10 @@ export default function Home()
                   />
                 );
               })
-            )}
+          }
         </Row>
       </Card>
+      )}
       { isLoading && 
       <Loader
         type="ThreeDots"
