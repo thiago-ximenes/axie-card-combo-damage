@@ -1,19 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-// import Loader from 'react-loader-spinner';
 import axieApi from '../services/getAxiesByRoninAdress';
 import { Form, Container, Button, Row, Col, InputGroup } from 'react-bootstrap';
 import AxieRoninTeam from '../components/AxieRoninTeam';
+import Loader from 'react-loader-spinner';
 // import { useNavigate } from 'react-router-dom';
 
 export default function Home()
 {
   const [roninDetails, setRoninDetails] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   const [roninAddress, setRoninAddress] = useState('');
   const [isGoButtonDisable, setGoButtonEnable] = useState(true);    const [ axieTeam, setAxieToTheTeam ] = useState([]);
   const [ teamIsFull, setTeamIsFull ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   // const navigate = useNavigate();
 
@@ -41,7 +41,9 @@ export default function Home()
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem('roninAddress', roninAddress);
+    setIsLoading(true);
     axieApi(roninAddress).then((roninDetails) => setRoninDetails(roninDetails));
+    setIsLoading(false);
     // navigate('/axie-team');
   }
 
@@ -90,6 +92,15 @@ export default function Home()
         </Form.Group>
       </Form>
       <h2 className="text-center">Select The Axie Team</h2>
+      { isLoading && 
+      <Loader
+        type="ThreeDots"
+        color="#00BFFF"
+        height={80}
+        width={80}
+        className="text-center"
+      />
+     }
       <Row className='g-3 container mt-1 justify-content-md-center' xs={1} md={3}>
         { roninDetails.length > 0 && (
           roninDetails.map((axie) => {
