@@ -25,7 +25,7 @@ export default function Home()
   }, [])
 
   useEffect(() => {
-    if(roninAddress.length === 40)
+    if(roninAddress.length === 46)
       setGoButtonEnable(false);
     else
       setGoButtonEnable(true);
@@ -42,14 +42,15 @@ export default function Home()
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem('roninAddress', roninAddress);
+    const roninAddressWithOutRoninName = roninAddress.replace('ronin:', '');
     setIsLoading(true);
-    axieApi(roninAddress).then((roninDetails) => setRoninDetails(roninDetails));
+    axieApi(roninAddressWithOutRoninName).then((roninDetails) => setRoninDetails(roninDetails));
     setIsLoading(false);
     // navigate('/axie-team');
   }
 
-  function handleOnChange (event) {
-    setRoninAddress(event.target.value);
+  function handleOnChange ({ target: { value } }) {
+    setRoninAddress(value);
   }
 
   function addAxieToTeam(id) {
@@ -67,10 +68,10 @@ export default function Home()
     <Container className="mt-5">
       <Form>
         <Form.Group>
-          <Row><Form.Label>Enter The Ronin Address</Form.Label></Row>
+          <Row><Form.Label>Find Your Axies</Form.Label></Row>
           <Row>
             <InputGroup>
-              <InputGroup.Text>ronin:</InputGroup.Text>
+              <InputGroup.Text>Enter The Ronin Address</InputGroup.Text>
             <Col>
               <Form.Control
                 value={ roninAddress }
@@ -95,30 +96,31 @@ export default function Home()
             </div>
         </Form.Group>
       </Form>
-      <h2 className="text-center">Select The Axie Team</h2>
       { axieTeam.length > 0 && (
-      <Card bg="dark">
-        <Row className='g-3 container mt-1 justify-content-md-center mb-4' xs={1} md={3}>
-          { axieTeam.map((axie) => {
-                return (
-                  <AxieTeamSelected
-                    key={ axie.id }
-                    axieInfo={ axie }
-                    teamIsFull={ teamIsFull }
-                    name={ axie.name }
-                  />
-                );
-              })
-          }
-          <Button
-            size="lg"
-            disabled={ !teamIsFull }
-            variant={ teamIsFull ? 'success' : 'secondary' }
-          >
-            { teamIsFull ? "Let's Rock!" : `Add More ${ 3 - axieTeam.length } Axies` }
-          </Button>
-        </Row>
-      </Card>
+        <>
+          <Card bg="dark">
+          <Row className='g-3 container mt-1 justify-content-md-center mb-4' xs={1} md={3}>
+            { axieTeam.map((axie) => {
+                  return (
+                    <AxieTeamSelected
+                      key={ axie.id }
+                      axieInfo={ axie }
+                      teamIsFull={ teamIsFull }
+                      name={ axie.name }
+                    />
+                  );
+                })
+            }
+            <Button
+              size="lg"
+              disabled={ !teamIsFull }
+              variant={ teamIsFull ? 'success' : 'secondary' }
+            >
+              { teamIsFull ? "Let's Rock!" : `Add More ${ 3 - axieTeam.length } Axies` }
+            </Button>
+          </Row>
+        </Card>
+        </>
       )}
       { isLoading && 
       <Loader
@@ -129,20 +131,23 @@ export default function Home()
         className="text-center"
       />
      }
-      <Row className='g-3 container mt-1 justify-content-md-center' xs={1} md={3}>
-        { roninDetails.length > 0 && (
-          roninDetails.map((axie) => {
-            return (
-              <AxieRoninTeam
-                key={ axie.id }
-                axieInfo={ axie }
-                axieIdReceived={ addAxieToTeam }
-                teamIsFull={ teamIsFull }
-              />
-            );
-          })
-        )}
-      </Row>
+        { roninDetails.length > 0 ? (
+          <>
+            <h2 className="text-center mt-3">Select The Axie Team</h2>
+            <Row className='g-3 container mt-1 justify-content-md-center' xs={1} md={3}>
+            {roninDetails.map((axie) => {
+              return (
+                <AxieRoninTeam
+                  key={ axie.id }
+                  axieInfo={ axie }
+                  axieIdReceived={ addAxieToTeam }
+                  teamIsFull={ teamIsFull }
+                />
+              );
+            })}
+            </Row>
+          </>
+          ) : <h2 className="text-center mt-3">There's No Axie at The This Ronin Address</h2>}
     </Container>
   );
 }

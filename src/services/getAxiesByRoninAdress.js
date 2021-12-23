@@ -1,4 +1,4 @@
-// 0x9e7339d3ef119038fb73b603d6dfbec7a21c621f
+// 2c1829af314a4a7b384f127e768287e1994a619c
 const URL_API = 'https://graphql-gateway.axieinfinity.com/graphql';
 
 export default async function axieApi(roninAddress)
