@@ -9,7 +9,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={ <Home /> } />
-        <Route path="/axie-team" element={ <AxiesTeam /> } />
+        <Route path="/axie-team/" element={ <AxiesTeam /> } />
       </Routes>
     </HashRouter>
 

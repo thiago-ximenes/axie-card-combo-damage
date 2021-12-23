@@ -6,7 +6,7 @@ import { Form, Container, Button, Row, Col, InputGroup, Card } from 'react-boots
 import AxieRoninTeam from '../components/AxieRoninTeam';
 import AxieTeamSelected from '../components/AxieTeamSelected';
 import Loader from 'react-loader-spinner';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home()
 {
@@ -16,7 +16,7 @@ export default function Home()
   const [ teamIsFull, setTeamIsFull ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem('roninAddress')) {
@@ -39,6 +39,10 @@ export default function Home()
     }
   }, [axieTeam])
 
+  useEffect(() => {
+    localStorage.setItem('axieTeam', JSON.stringify(axieTeam));
+  }, [teamIsFull, axieTeam])
+
   function handleSubmit(event) {
     event.preventDefault();
     localStorage.setItem('roninAddress', roninAddress);
@@ -46,7 +50,6 @@ export default function Home()
     setIsLoading(true);
     axieApi(roninAddressWithOutRoninName).then((roninDetails) => setRoninDetails(roninDetails));
     setIsLoading(false);
-    // navigate('/axie-team');
   }
 
   function handleOnChange ({ target: { value } }) {
@@ -62,7 +65,9 @@ export default function Home()
     }
   }
 
-  console.log(axieTeam)
+  function handleOnClickFullTeam() {
+    navigate('/axie-team');
+  }
 
   return (
     <Container className="mt-5">
@@ -115,6 +120,7 @@ export default function Home()
               size="lg"
               disabled={ !teamIsFull }
               variant={ teamIsFull ? 'success' : 'secondary' }
+              onClick={ handleOnClickFullTeam }
             >
               { teamIsFull ? "Let's Rock!" : `Add More ${ 3 - axieTeam.length } Axies` }
             </Button>
