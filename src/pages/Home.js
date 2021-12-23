@@ -147,7 +147,7 @@ export default function Home()
             })}
             </Row>
           </>
-          ) : <h2 className="text-center mt-3">There's No Axie at The This Ronin Address</h2>}
+          ) : <h2 className="text-center mt-3">There's No Axie From This Ronin Address</h2>}
     </Container>
   );
 }
