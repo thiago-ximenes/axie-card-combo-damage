@@ -9,8 +9,6 @@ export default function AxiesTeam() {
   const storage = localStorage.getItem('axieTeam');
   const [ axieTeam ] = useState(JSON.parse(storage));
 
-  console.log(axieTeam);
-
   return (
     <Container className="mt-5">
       <h1 className="text-center mb-4">Combat Time!</h1>
