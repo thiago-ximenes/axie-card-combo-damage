@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import axieApi from '../services/getAxiesByRoninAdress';
+import axieApiById from '../services/getAxieDetailsById';
 import { Form, Container, Button, Row, Col, InputGroup, Card } from 'react-bootstrap';
 import AxieRoninTeam from '../components/AxieRoninTeam';
 import AxieTeamSelected from '../components/AxieTeamSelected';
@@ -56,10 +57,12 @@ export default function Home()
     setRoninAddress(value);
   }
 
-  function addAxieToTeam(id) {
-    const axieSelected = roninDetails.find((axie) => axie.id === id);
-    if (axieTeam.includes(axieSelected)) {
-      setAxieToTheTeam(axieTeam.filter((axie) => axie !== axieSelected));
+  async function addAxieToTeam(id) {
+    setIsLoading(true);
+    const axieSelected = await axieApiById(id);
+    setIsLoading(false);
+    if (axieTeam.some((axie) => axie.id === id)) {
+      setAxieToTheTeam(axieTeam.filter((axie) => axie.id !== axieSelected.id));
     } else if (axieTeam.length < 3) {
     setAxieToTheTeam([ ...axieTeam, axieSelected ]);
     }
@@ -68,6 +71,8 @@ export default function Home()
   function handleOnClickFullTeam() {
     navigate('/axie-team');
   }
+
+  console.log(axieTeam);
 
   return (
     <Container className="mt-5">

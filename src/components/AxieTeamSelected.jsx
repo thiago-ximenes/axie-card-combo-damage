@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
 
 export default function AxieTeamSelected(props) {
   const { axieInfo, name } = props;
-  const { image, id } = axieInfo;
+  const { image } = axieInfo;
   return (
     <Col lg={3} sm={1}>
       <Card>
