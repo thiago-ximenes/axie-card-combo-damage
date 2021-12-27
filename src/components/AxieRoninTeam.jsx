@@ -7,7 +7,7 @@ export default function AxieRoninTeam(props) {
   const [ select, setSelect ] = useState('Select');
   const [ buttonVariant, setButtonVariant ] = useState('success');
 
-  const { axieInfo, axieIdReceived, teamIsFull } = props;
+  const { axieInfo, axieIdReceived, teamIsFull, isLoading } = props;
   const { image, id } = axieInfo;
 
   useEffect(() => {
@@ -40,6 +40,7 @@ export default function AxieRoninTeam(props) {
         <Card.Body>
             <Row>
               <Button
+                disabled={ isLoading }
                 size="lg"
                 variant={ buttonVariant }
                 onClick={ handleClick }

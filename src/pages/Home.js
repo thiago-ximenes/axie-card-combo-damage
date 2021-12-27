@@ -72,8 +72,6 @@ export default function Home()
     navigate('/axie-team');
   }
 
-  console.log(axieTeam);
-
   return (
     <Container className="mt-5">
       <Form>
@@ -153,6 +151,7 @@ export default function Home()
                   axieInfo={ axie }
                   axieIdReceived={ addAxieToTeam }
                   teamIsFull={ teamIsFull }
+                  isLoading={ isLoading }
                 />
               );
             })}
