@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, Button, Col, Row } from 'react-bootstrap';
 
 export default function AxieCards(props) {
 
@@ -7,18 +8,27 @@ export default function AxieCards(props) {
   console.log(cards);
 
   return (
-    <div>
+    <Row md={2} xs={2} className="g-2">
       {
         cards.map((card, index) => {
+            const { abilities } = card;
           if (index > 1) return (
-            <img
-              key={ card.id }
-              src={ card.abilities[0].backgroundUrl }
-              alt={ card.abilities[0].name }
+            <Col className="mb-2">
+              <Card.Img
+                key={ card.id }
+                src={ abilities[0].backgroundUrl }
+                alt={ abilities[0].name }
               />
+              <div>{ abilities[0].attack }</div>
+              <div>{ abilities[0].defense }</div>
+              <div>{ abilities[0].description }</div>
+              <img src={ abilities[0].effectIconUrl } />
+              <div>{ abilities[0].energy }</div>
+              <div>{ abilities[0].name }</div>
+            </Col>
           )
         })
       }
-    </div>
+    </Row>
   )
 }

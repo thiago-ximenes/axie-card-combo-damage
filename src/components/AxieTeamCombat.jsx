@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { Card, Container, Button, Col, Row } from 'react-bootstrap';
 import AxieCards from './AxieCards';
 
 export default function AxieTeamCombat(props) {
@@ -12,9 +12,9 @@ export default function AxieTeamCombat(props) {
       <Card.Img variant="top" src={ axie.image } />
         <Card.Body>
           <Card.Title>{ axie.name }</Card.Title>
-          <AxieCards 
-            cards={ parts }
-          />
+            <AxieCards 
+              cards={ parts }
+            />
         </Card.Body>
     </Card>
   )
