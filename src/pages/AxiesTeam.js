@@ -13,7 +13,7 @@ export default function AxiesTeam() {
 
   return (
     <Container className="mt-5">
-      <h1 className="text-center mb-4">Combat Time</h1>
+      <h1 className="text-center mb-4">Combat Time!</h1>
       <Row xs={1} md={3} className="g-3">
         {
           axieTeam.map((
