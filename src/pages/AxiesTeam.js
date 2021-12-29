@@ -8,6 +8,7 @@ export default function AxiesTeam() {
 
   const storage = localStorage.getItem('axieTeam');
   const [ axieTeam ] = useState(JSON.parse(storage));
+  const [ total , setTotal ] = useState(0);
 
   return (
     <Container fluid className="mt-5">
@@ -24,6 +25,7 @@ export default function AxiesTeam() {
           )
         }
       </Row>
+      <p>{ total }</p>
     </Container>
   )
 }

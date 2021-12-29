@@ -22,7 +22,7 @@ export default function AxieCards(props) {
               <div>{ abilities[0].attack }</div>
               <div>{ abilities[0].defense }</div>
               <div>{ abilities[0].description }</div>
-              <img src={ abilities[0].effectIconUrl } />
+              <img src={ abilities[0].effectIconUrl }  alt={ card.name }/>
               <div>{ abilities[0].energy }</div>
               <div>{ abilities[0].name }</div>
             </Col>
