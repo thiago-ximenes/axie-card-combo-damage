@@ -1,0 +1,11 @@
+.card-img {
+  transition: all 0.1s ease-in-out;
+}
+
+.card-img:hover {
+  transform: scale(1.05);
+}
+
+.card-img:active {
+  transform: scale(0.9);
+}
