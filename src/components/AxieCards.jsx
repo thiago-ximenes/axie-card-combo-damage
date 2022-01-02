@@ -5,6 +5,7 @@ import '../css/axieCards.css';
 export default function AxieCards(props) {
 
   const { cards } = props;
+  const [ numberOfCardsUsed, setNumberOfCardsUsed ] = React.useState(0);
 
   console.log(cards);
 
@@ -21,12 +22,6 @@ export default function AxieCards(props) {
                 src={ abilities[0].backgroundUrl }
                 alt={ abilities[0].name }
               />
-          {/* <div>{ abilities[0].attack }</div>
-              <div>{ abilities[0].defense }</div>
-              <div>{ abilities[0].description }</div>
-              <img src={ abilities[0].effectIconUrl }  alt={ card.name }/>
-              <div>{ abilities[0].energy }</div>
-              <div>{ abilities[0].name }</div> */}
             </Col>
           )
         })
