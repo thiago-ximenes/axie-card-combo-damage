@@ -1,7 +1,9 @@
-import React from 'react';
-import { Row, Container } from 'react-bootstrap';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Card, Container, Row } from 'react-bootstrap';
 import AxieTeamCombat from '../components/AxieTeamCombat';
+import DPS from '../images/DPS.png';
+import duelist from '../images/duelist.png';
+import tank from '../images/tank.png';
 
 export default function AxiesTeam() {
 
@@ -25,7 +27,27 @@ export default function AxiesTeam() {
           )
         }
       </Row>
-      <p>{ total }</p>
+      <Row xs={1} md={3} className="g-3">
+        <Card>
+          <Card.Img
+            className="mt-1"
+            variant="left"
+            src={ tank }
+          />
+        </Card>
+        <Card>
+          <Card.Img
+            variant="left"
+            src={ duelist }
+          />
+        </Card>
+        <Card>
+          <Card.Img
+            variant="left"
+            src={ DPS }
+          />
+        </Card>
+      </Row>
     </Container>
   )
 }

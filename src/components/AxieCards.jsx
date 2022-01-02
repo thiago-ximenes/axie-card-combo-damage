@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Cards from './Cards';
 import '../css/axieCards.css';
