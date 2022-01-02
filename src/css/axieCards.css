@@ -4,8 +4,13 @@
 
 .card-img:hover {
   transform: scale(1.03);
+  cursor: pointer;
 }
 
 .card-img:active {
   transform: scale(0.95);
+}
+
+.card-disabled {
+  opacity: 0.2;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Container, Button, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import AxieCards from './AxieCards';
 
 export default function AxieTeamCombat(props) {
