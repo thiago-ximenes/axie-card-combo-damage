@@ -104,9 +104,9 @@ export default function Home()
             </div>
         </Form.Group>
       </Form>
-      { axieTeam.length > 0 && (
+      { axieTeam.length >= 0 && (
         <>
-          <Card bg="dark">
+          <Card bg="dark mt-1">
           <Row className='g-3 container mt-1 justify-content-md-center mb-4' xs={1} md={3}>
             { axieTeam.map((axie) => {
                   return (
@@ -119,6 +119,19 @@ export default function Home()
                   );
                 })
             }
+
+          </Row>
+          <Row className='container mb-3'>
+            { isLoading ? 
+            <Loader
+              type="ThreeDots"
+              color="#00BFFF"
+              height={80}
+              width={80}
+              className="text-center"
+            />
+            :
+            (
             <Button
               size="lg"
               disabled={ !teamIsFull }
@@ -127,19 +140,12 @@ export default function Home()
             >
               { teamIsFull ? "Let's Rock!" : `Add More ${ 3 - axieTeam.length } Axies` }
             </Button>
+            )
+            }
           </Row>
         </Card>
         </>
       )}
-      { isLoading && 
-      <Loader
-        type="ThreeDots"
-        color="#00BFFF"
-        height={80}
-        width={80}
-        className="text-center"
-      />
-     }
         { roninDetails.length > 0 ? (
           <>
             <h2 className="text-center mt-3">Select The Axie Team</h2>
